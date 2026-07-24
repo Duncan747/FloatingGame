@@ -34,6 +34,8 @@ public class BodyBobber : MonoBehaviour
     private Ray vertCast;
     private RaycastHit vertHitInfo;
 
+    private LayerMask oceanMask;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,8 @@ public class BodyBobber : MonoBehaviour
         mainCast = new Ray(mainCastOrigin.position, Vector3.down);
         horiCast = new Ray(horiCastOrigin.position, Vector3.down);
         vertCast = new Ray(vertCastOrigin.position, Vector3.down);
+
+        oceanMask = LayerMask.GetMask("Ocean");
     }
 
     private void Update()
@@ -78,9 +82,9 @@ public class BodyBobber : MonoBehaviour
 
     void FixedUpdate()
     {
-        Physics.Raycast(mainCast, out mainHitInfo);
-        Physics.Raycast(horiCast, out horiHitInfo);
-        Physics.Raycast(vertCast, out vertHitInfo);
+        Physics.Raycast(mainCast, out mainHitInfo, 1000f, oceanMask);
+        Physics.Raycast(horiCast, out horiHitInfo, 1000f, oceanMask);
+        Physics.Raycast(vertCast, out vertHitInfo, 1000f, oceanMask);
 
         heightTarg = heightThreshold - mainHitInfo.distance;
 
