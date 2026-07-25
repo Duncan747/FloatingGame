@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class BodyBobber : MonoBehaviour
 {
+    public bool rotateBody = false;
     public float heightThreshold;
     public float heightLerpSpeed;
     public float rotLerpSpeed;
 
     public GameObject bodyPart;
     private Vector3 restingPos;
+    public Quaternion restingRot;
 
     public float heightTarg;
     public float sinkMax;
@@ -41,6 +43,7 @@ public class BodyBobber : MonoBehaviour
     void Start()
     {
         restingPos = bodyPart.transform.position;
+        restingRot = bodyPart.transform.rotation;
         oceanMask = LayerMask.GetMask("Ocean");
     }
 
@@ -101,7 +104,8 @@ public class BodyBobber : MonoBehaviour
 
 
         bodyPart.transform.position = Vector3.Lerp(bodyPart.transform.position, new Vector3(bodyPart.transform.position.x, restingPos.y + (heightTarg - sinkTarg), bodyPart.transform.position.z), heightLerpSpeed);
-        bodyPart.transform.rotation = Quaternion.Lerp(bodyPart.transform.rotation, (horiQuat * vertQuat), rotLerpSpeed);
+        if (rotateBody) 
+        bodyPart.transform.rotation = Quaternion.Lerp(bodyPart.transform.rotation, (horiQuat * vertQuat * restingRot), rotLerpSpeed);
     }
 
     IEnumerator SinkDown()
