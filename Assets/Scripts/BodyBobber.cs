@@ -41,15 +41,12 @@ public class BodyBobber : MonoBehaviour
     void Start()
     {
         restingPos = bodyPart.transform.position;
-        mainCast = new Ray(mainCastOrigin.position, Vector3.down);
-        horiCast = new Ray(horiCastOrigin.position, Vector3.down);
-        vertCast = new Ray(vertCastOrigin.position, Vector3.down);
-
         oceanMask = LayerMask.GetMask("Ocean");
     }
 
     private void Update()
     {
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             isSinking = false;
@@ -82,6 +79,10 @@ public class BodyBobber : MonoBehaviour
 
     void FixedUpdate()
     {
+        mainCast = new Ray(mainCastOrigin.position, Vector3.down);
+        horiCast = new Ray(horiCastOrigin.position, Vector3.down);
+        vertCast = new Ray(vertCastOrigin.position, Vector3.down);
+
         Physics.Raycast(mainCast, out mainHitInfo, 1000f, oceanMask);
         Physics.Raycast(horiCast, out horiHitInfo, 1000f, oceanMask);
         Physics.Raycast(vertCast, out vertHitInfo, 1000f, oceanMask);
