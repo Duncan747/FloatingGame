@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class BodyBobber : MonoBehaviour
 {
+    public bool rotateBody = false;
     public float heightThreshold;
     public float heightLerpSpeed;
     public float rotLerpSpeed;
 
     public GameObject bodyPart;
     private Vector3 restingPos;
+    public Quaternion restingRot;
 
     public float heightTarg;
     public float sinkMax;
@@ -41,15 +43,13 @@ public class BodyBobber : MonoBehaviour
     void Start()
     {
         restingPos = bodyPart.transform.position;
-        mainCast = new Ray(mainCastOrigin.position, Vector3.down);
-        horiCast = new Ray(horiCastOrigin.position, Vector3.down);
-        vertCast = new Ray(vertCastOrigin.position, Vector3.down);
-
+        restingRot = bodyPart.transform.rotation;
         oceanMask = LayerMask.GetMask("Ocean");
     }
 
     private void Update()
     {
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             isSinking = false;
@@ -82,6 +82,10 @@ public class BodyBobber : MonoBehaviour
 
     void FixedUpdate()
     {
+        mainCast = new Ray(mainCastOrigin.position, Vector3.down);
+        horiCast = new Ray(horiCastOrigin.position, Vector3.down);
+        vertCast = new Ray(vertCastOrigin.position, Vector3.down);
+
         Physics.Raycast(mainCast, out mainHitInfo, 1000f, oceanMask);
         Physics.Raycast(horiCast, out horiHitInfo, 1000f, oceanMask);
         Physics.Raycast(vertCast, out vertHitInfo, 1000f, oceanMask);
@@ -100,7 +104,8 @@ public class BodyBobber : MonoBehaviour
 
 
         bodyPart.transform.position = Vector3.Lerp(bodyPart.transform.position, new Vector3(bodyPart.transform.position.x, restingPos.y + (heightTarg - sinkTarg), bodyPart.transform.position.z), heightLerpSpeed);
-        bodyPart.transform.rotation = Quaternion.Lerp(bodyPart.transform.rotation, (horiQuat * vertQuat), rotLerpSpeed);
+        if (rotateBody) 
+        bodyPart.transform.rotation = Quaternion.Lerp(bodyPart.transform.rotation, (horiQuat * vertQuat * restingRot), rotLerpSpeed);
     }
 
     IEnumerator SinkDown()
