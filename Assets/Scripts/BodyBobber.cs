@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class BodyBobber : MonoBehaviour
 {
+    public bool trackTorso;
+    public bool trackLegs;
+    public bool trackArms;
+    private bool sinkToggle;
+    public SinkManager SinkManagerRef;
+
     public bool rotateBody = false;
     public float heightThreshold;
     public float heightLerpSpeed;
@@ -23,6 +29,7 @@ public class BodyBobber : MonoBehaviour
     private float sinkTimer;
     private float sinkTarg = 0f;
     private bool isSinking;
+    private bool hasSunk;
     private float recoveryMultipler = 1f;
 
     public Transform mainCastOrigin;
@@ -49,9 +56,31 @@ public class BodyBobber : MonoBehaviour
 
     private void Update()
     {
-
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(trackTorso)
         {
+            sinkToggle = SinkManagerRef.swimBreath;
+            SinkManagerRef.torsoSunk = hasSunk;
+        }
+        else if(trackArms)
+        {
+            sinkToggle = SinkManagerRef.swimArms;
+            SinkManagerRef.armsSunk = hasSunk;
+        }
+        else if(trackLegs)
+        {
+            sinkToggle = SinkManagerRef.swimLegs;
+            SinkManagerRef.legsSunk = hasSunk;
+        }
+        else
+        {
+            sinkToggle = Input.GetKeyDown(KeyCode.Space);
+        }
+
+        if(sinkToggle)
+        {
+            if (trackTorso && SinkManagerRef.armsSunk && SinkManagerRef.legsSunk)
+                return;
+
             isSinking = false;
 
             sinkTimer -= sinkCooldown / sinkTimeRecoverScaler;
@@ -121,6 +150,10 @@ public class BodyBobber : MonoBehaviour
             {
                 break;
             }
+            else if (sinkTarg > (sinkMax * 0.9f))
+            {
+                hasSunk = true;
+            }
 
             yield return null;
         }
@@ -140,10 +173,14 @@ public class BodyBobber : MonoBehaviour
             {
                 break;
             }
+            else if (sinkTarg < sinkMax * 0.9f)
+            {
+                hasSunk = false;
+            }
 
             yield return null;
 
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(sinkToggle)
             {
                 break;
             }

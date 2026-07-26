@@ -6,9 +6,11 @@ using UnityEngine.Audio;
 
 public class TextSpawner : MonoBehaviour
 {
+    public SinkManager SinkManager;
     public GameObject textObject;
     private GameObject curObj;
     private TextMeshPro tmpRef;
+    public TextMeshPro fontRef;
     private TextHandler textHandleRef;
     public float delayTextBegin;
     public float textDelayMin;
@@ -16,6 +18,10 @@ public class TextSpawner : MonoBehaviour
     public float textMoveSpeedMin;
     public float textMoveSpeedMax;
     public AudioMixer audioMixer;
+    public AudioMixerSnapshot normal;
+    public AudioMixerSnapshot underwater;
+    public float underwaterTransition;
+    public float normalTransition;
 
     public string[] textLines;
     private int textIterator;
@@ -38,7 +44,17 @@ public class TextSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(SinkManager.torsoSunk && !isSubmerging)
+        {
+            isSubmerging = true;
+            BeginSubmerge();
+            Debug.Log("Submerge has begun");
+        }
+        else if (!SinkManager.torsoSunk && isSubmerging)
+        {
+            isSubmerging = false;
+            EndSubmerge();
+        }
     }
 
     private void SpawnText()
@@ -81,23 +97,23 @@ public class TextSpawner : MonoBehaviour
 
     private void BeginSubmerge()
     {
-        isSubmerging = true;
+        underwater.TransitionTo(underwaterTransition);
         StartCoroutine(SubmergeMuffle());
     }
 
     private void EndSubmerge()
     {
-        isSubmerging = false;
+        normal.TransitionTo(normalTransition);
         StartCoroutine(EmergeUnmuffle());
     }
 
     IEnumerator SubmergeMuffle()
     {
         float t = 0;
-        curTextSoftness = tmpRef.fontMaterial.GetFloat(ShaderUtilities.ID_OutlineSoftness);
+        curTextSoftness =  fontRef.fontMaterial.GetFloat(ShaderUtilities.ID_OutlineSoftness);
         while (t < submergeLerp)
         {
-            tmpRef.fontMaterial.SetFloat(ShaderUtilities.ID_OutlineSoftness, Mathf.Lerp(curTextSoftness, 1f, (t / submergeLerp)));
+            fontRef.fontMaterial.SetFloat(ShaderUtilities.ID_OutlineSoftness, Mathf.Lerp(curTextSoftness, 1f, (t / submergeLerp)));
             t += Time.deltaTime;
 
             if (!isSubmerging)
@@ -112,7 +128,7 @@ public class TextSpawner : MonoBehaviour
     IEnumerator EmergeUnmuffle()
     {
         float t = 0;
-        curTextSoftness = tmpRef.fontMaterial.GetFloat(ShaderUtilities.ID_OutlineSoftness);
+        curTextSoftness = fontRef.fontMaterial.GetFloat(ShaderUtilities.ID_OutlineSoftness);
         while (t < submergeLerp)
         {
             tmpRef.fontMaterial.SetFloat(ShaderUtilities.ID_OutlineSoftness, Mathf.Lerp(curTextSoftness, 0f, (t / submergeLerp)));
