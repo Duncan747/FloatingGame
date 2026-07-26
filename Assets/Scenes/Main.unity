@@ -3278,10 +3278,10 @@ Animator:
   m_GameObject: {fileID: 842198724}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 859c3674d84437a41b494f506e2f46ba, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -6385,7 +6385,7 @@ AimConstraint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933567616}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Weight: 0.7
   m_RotationAtRest: {x: -0.88714546, y: -0.3487514, z: -2.6630034}
