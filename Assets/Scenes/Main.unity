@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.066037595, g: 0.7335091, b: 1, a: 1}
+  m_AmbientEquatorColor: {r: 0.6981132, g: 0.64446515, b: 0.15674609, a: 1}
+  m_AmbientGroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 410087040}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1427,7 +1427,7 @@ ParentConstraint:
   m_Active: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 0}
+  - sourceTransform: {fileID: 1218193184}
     weight: 1
 --- !u!4 &324266682 stripped
 Transform:
@@ -1863,6 +1863,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_Character
       objectReference: {fileID: 0}
+    - target: {fileID: 1171913966429097548, guid: 22860d56ac188b84d9f6f77cff23694a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 144d103508b640046bce9feb9d4d0016, type: 2}
     - target: {fileID: 6185067157445468383, guid: 22860d56ac188b84d9f6f77cff23694a,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -1876,17 +1881,17 @@ PrefabInstance:
     - target: {fileID: 6185067157445468383, guid: 22860d56ac188b84d9f6f77cff23694a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.985928
+      value: 0.9859276
       objectReference: {fileID: 0}
     - target: {fileID: 6185067157445468383, guid: 22860d56ac188b84d9f6f77cff23694a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6185067157445468383, guid: 22860d56ac188b84d9f6f77cff23694a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.16717087
+      value: -0.16717307
       objectReference: {fileID: 0}
     - target: {fileID: 8703298846467447247, guid: 22860d56ac188b84d9f6f77cff23694a,
         type: 3}
@@ -3273,7 +3278,7 @@ Animator:
   m_GameObject: {fileID: 842198724}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 859c3674d84437a41b494f506e2f46ba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4478,13 +4483,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251947372}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.8859583, y: -0.070502, z: 0.4353406, w: 0.14347807}
+  m_LocalRotation: {x: 0.6346291, y: -0.31184292, z: 0.31184292, w: 0.6346291}
   m_LocalPosition: {x: -0.09754929, y: -0.023891903, z: 0.3873765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1249018803}
-  m_LocalEulerAnglesHint: {x: 161.602, y: -52.337006, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -52.337006, z: 0}
 --- !u!1 &1265570476
 GameObject:
   m_ObjectHideFlags: 0
@@ -5120,13 +5125,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485507785}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11006741, y: 0.88191754, z: 0.12386289, w: -0.4413213}
+  m_LocalRotation: {x: -0.27058083, y: -0.7455865, z: -0.46510503, w: 0.39314646}
   m_LocalPosition: {x: -0.09754908, y: -0.023891687, z: -0.3873765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 18104992}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -65, y: -127.663, z: 5.128}
 --- !u!1 &1489430432
 GameObject:
   m_ObjectHideFlags: 0
@@ -6380,7 +6385,7 @@ AimConstraint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933567616}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Weight: 0.7
   m_RotationAtRest: {x: -0.88714546, y: -0.3487514, z: -2.6630034}
