@@ -143,6 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd0ef9a0fbd1134b853e0a1f0424ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackTorso: 0
+  trackLegs: 0
+  trackArms: 0
+  SinkManagerRef: {fileID: 0}
+  rotateBody: 0
   heightThreshold: 2
   heightLerpSpeed: 0.1
   rotLerpSpeed: 0.1
@@ -152,7 +157,7 @@ MonoBehaviour:
   sinkMax: 1
   sinkSpeed: 2
   floatSpeed: 4
-  sinkCooldown: 6
+  sinkCooldown: 600
   sinkTimeRecoverScaler: 10
   mainCastOrigin: {fileID: 7085805865032700211}
   horiCastOrigin: {fileID: 5767826812175251036}

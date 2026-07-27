@@ -2139,14 +2139,15 @@ MonoBehaviour:
   delayTextBegin: 1
   textDelayMin: 2
   textDelayMax: 3
-  textMoveSpeedMin: 0.05
-  textMoveSpeedMax: 0.08
+  textMoveSpeedMin: 0.005
+  textMoveSpeedMax: 0.01
   audioMixer: {fileID: 24100000, guid: 9a14c4d36083f1d4fb4f7be90f81d574, type: 2}
   normal: {fileID: 24500006, guid: 9a14c4d36083f1d4fb4f7be90f81d574, type: 2}
   underwater: {fileID: -9015564738404695843, guid: 9a14c4d36083f1d4fb4f7be90f81d574,
     type: 2}
   underwaterTransition: 0.8
   normalTransition: 1.5
+  submergeLerp: 1
   textLines:
   - Hello
   - Lisa
@@ -5163,11 +5164,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7420909793883029289, guid: 78132f790391cc149b3c9b9df82c84f8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78132f790391cc149b3c9b9df82c84f8, type: 3}
 --- !u!1001 &1620734459992690313
 PrefabInstance:
