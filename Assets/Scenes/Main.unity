@@ -5177,17 +5177,7 @@ PrefabInstance:
     - target: {fileID: 1141400892838196667, guid: dc9ac08f60ab2144882273379987c564,
         type: 3}
       propertyPath: maxSwim
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141400892838196667, guid: dc9ac08f60ab2144882273379987c564,
-        type: 3}
-      propertyPath: autoRecoverTime
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141400892838196667, guid: dc9ac08f60ab2144882273379987c564,
-        type: 3}
-      propertyPath: autoRecoverSwimSpeed
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4100363762098444174, guid: dc9ac08f60ab2144882273379987c564,
         type: 3}
@@ -5238,21 +5228,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4789003213911872304, guid: dc9ac08f60ab2144882273379987c564,
-        type: 3}
-      propertyPath: sinkMax
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4789003213911872304, guid: dc9ac08f60ab2144882273379987c564,
-        type: 3}
-      propertyPath: sinkSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4789003213911872304, guid: dc9ac08f60ab2144882273379987c564,
-        type: 3}
-      propertyPath: floatSpeed
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5584386513580600461, guid: dc9ac08f60ab2144882273379987c564,
         type: 3}
