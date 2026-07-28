@@ -25,6 +25,12 @@ public class SinkManager : MonoBehaviour
     public bool torsoSunk;
     public bool armsSunk;
     public bool legsSunk;
+    public float autoRecoverTime;
+    public bool autoRecover;
+    private bool runOnce;
+    public float autoRecoverSwimSpeed;
+    private float legsAutoTarg;
+    private float armsAutoTarg;
 
     public float sensitivityX;
     public float sensitivityY;
@@ -101,6 +107,41 @@ public class SinkManager : MonoBehaviour
             Debug.Log("Breathed successfully");
                 
         }
+
+        if(torsoSunk && !runOnce)
+        {
+            runOnce = true;
+            StartCoroutine(AutoRecoverDelay());
+        }
+        else if (!torsoSunk)
+        {
+            autoRecover = false;
+            runOnce = false;
+        }
+
+        if(autoRecover)
+        {
+            if (legsTracker > (maxSwim * 0.9f))
+            {
+                legsAutoTarg = 0;
+            }
+            else if (legsTracker < (maxSwim * 0.1))
+            {
+                legsAutoTarg = maxSwim;
+            }
+
+            if (armsTracker > (maxSwim * 0.9f))
+            {
+                armsAutoTarg = 0;
+            }
+            else if (armsTracker < (maxSwim * 0.1))
+            {
+                armsAutoTarg = maxSwim;
+            }
+
+            legsTracker = Mathf.Lerp(legsTracker, legsAutoTarg, autoRecoverSwimSpeed);
+            armsTracker = Mathf.Lerp(armsTracker, armsAutoTarg, autoRecoverSwimSpeed);
+        }
     }
 
     private void CheckBreath()
@@ -152,5 +193,22 @@ public class SinkManager : MonoBehaviour
         {
             swimArms = false;
         }
+    }
+
+    IEnumerator AutoRecoverDelay()
+    {
+        float t = 0;
+        while (t < autoRecoverTime)
+        {
+            t += Time.deltaTime;
+
+            if (!torsoSunk)
+            {
+                runOnce = false;
+                break;
+            }
+            yield return null;
+        }
+        autoRecover = true;
     }
 }

@@ -9,6 +9,7 @@ public class BodyBobber : MonoBehaviour
     public bool trackArms;
     private bool sinkToggle;
     public SinkManager SinkManagerRef;
+    private bool mustSwimToRecover = false;
 
     public bool rotateBody = false;
     public float heightThreshold;
@@ -58,8 +59,23 @@ public class BodyBobber : MonoBehaviour
     {
         if(trackTorso)
         {
-            sinkToggle = SinkManagerRef.swimBreath;
             SinkManagerRef.torsoSunk = hasSunk;
+            if(hasSunk)
+            {
+                if(SinkManagerRef.swimArms && !sinkToggle || SinkManagerRef.swimLegs && !sinkToggle)
+                {
+                    Debug.Log("Swim Recovery should occur");
+                    sinkToggle = true;
+                }
+                else
+                {
+                    sinkToggle = false;
+                }
+            }
+            else
+            {
+                sinkToggle = SinkManagerRef.swimBreath;
+            }
         }
         else if(trackArms)
         {
@@ -150,7 +166,7 @@ public class BodyBobber : MonoBehaviour
             {
                 break;
             }
-            else if (sinkTarg > (sinkMax * 0.9f))
+            else if (sinkTarg > sinkMax * (trackTorso ? 0.4f : 0.9f))
             {
                 hasSunk = true;
             }
@@ -173,7 +189,7 @@ public class BodyBobber : MonoBehaviour
             {
                 break;
             }
-            else if (sinkTarg < sinkMax * 0.9f)
+            else if (sinkTarg < sinkMax * (trackTorso ? 0.4f : 0.9f))
             {
                 hasSunk = false;
             }
