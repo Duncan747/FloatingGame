@@ -34,6 +34,7 @@ public class TextSpawner : MonoBehaviour
     private bool isSubmerging = false;
     private float curAudioMix;
     private float curTextSoftness;
+    private bool runOnStart;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,12 @@ public class TextSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!runOnStart && tmpRef != null)
+        {
+            runOnStart = true;
+            tmpRef.fontSharedMaterial.SetFloat(ShaderUtilities.ID_OutlineSoftness, 0);
+        }
+
         if(SinkManager.torsoSunk && !isSubmerging)
         {
             isSubmerging = true;
@@ -72,7 +79,8 @@ public class TextSpawner : MonoBehaviour
 
         if(textIterator < textLines.Length)
         {
-            curObj = Instantiate(textObject, curSpawnPoint.position, Quaternion.Euler(90, 0, 0));
+            curObj = Instantiate(textObject, curSpawnPoint.position, curSpawnPoint.localRotation, this.transform);
+            //curObj.transform.localRotation = Quaternion.identity;
             tmpRef = curObj.GetComponentInChildren<TextMeshPro>();
             textHandleRef = curObj.GetComponent<TextHandler>();
             tmpRef.text = textLines[textIterator];
@@ -113,7 +121,7 @@ public class TextSpawner : MonoBehaviour
         curTextSoftness =  tmpRef.fontSharedMaterial.GetFloat(ShaderUtilities.ID_OutlineSoftness);
         while (t < submergeLerp)
         {
-            tmpRef.fontSharedMaterial.SetFloat(ShaderUtilities.ID_OutlineSoftness, Mathf.Lerp(curTextSoftness, 1f, (t / submergeLerp)));
+            tmpRef.fontSharedMaterial.SetFloat(ShaderUtilities.ID_OutlineSoftness, Mathf.Lerp(curTextSoftness, 0.9f, (t / submergeLerp)));
             t += Time.deltaTime;
 
             if (!isSubmerging)

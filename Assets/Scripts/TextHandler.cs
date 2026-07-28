@@ -16,9 +16,9 @@ public class TextHandler : MonoBehaviour
 
     void Update()
     {
-        if(this.transform.position.z > despawnTransform.position.z)
+        if(this.transform.localPosition.z > despawnTransform.localPosition.z)
         {
-            this.transform.position += new Vector3(moveDir.x * moveSpeed, moveDir.y * moveSpeed, moveDir.z * moveSpeed);
+            this.transform.localPosition += new Vector3(0, 0, moveDir.z * moveSpeed);
         }
         else
         {
