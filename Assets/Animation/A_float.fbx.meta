@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 21886b4d9ffe5f240abe7ad0bc13ab54
+guid: b2ba57adf0c982645ad2ef5980fd423e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Swim
-      takeName: Swim
-      internalID: 5414490534771693905
-      firstFrame: 0
-      lastFrame: 59
+      name: float
+      takeName: float
+      internalID: 1240660139225978290
+      firstFrame: 61
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -45,7 +45,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -60,7 +60,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 61
     isReadable: 0
   meshes:
     lODScreenPercentages: []
