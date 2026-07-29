@@ -2943,7 +2943,7 @@ GameObject:
   - component: {fileID: 1215786743}
   - component: {fileID: 1215786746}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Camera_Eyeblink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
