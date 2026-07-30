@@ -34,6 +34,14 @@ public class SinkManager : MonoBehaviour
 
     public float sensitivityX;
     public float sensitivityY;
+
+    public Animator anim;
+    public float swimResetTime;
+    private bool armAnimSwim;
+    private bool legAnimSwim;
+    private float armAnimTimer;
+    private float legAnimTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -142,6 +150,38 @@ public class SinkManager : MonoBehaviour
             legsTracker = Mathf.Lerp(legsTracker, legsAutoTarg, autoRecoverSwimSpeed);
             armsTracker = Mathf.Lerp(armsTracker, armsAutoTarg, autoRecoverSwimSpeed);
         }
+
+        if(swimArms)
+        {
+            armAnimSwim = true;
+            anim.SetBool("swimarms", true);
+            armAnimTimer = 0;
+        }
+        else if (armAnimSwim && armAnimTimer < swimResetTime)
+        {
+            armAnimTimer += Time.deltaTime;
+        }
+        else
+        {
+            armAnimSwim = false;
+            anim.SetBool("swimarms", false);
+        }
+
+        if (swimLegs)
+        {
+            legAnimSwim = true;
+            anim.SetBool("swimlegs", true);
+            legAnimTimer = 0;
+        }
+        else if (legAnimSwim && legAnimTimer < swimResetTime)
+        {
+            legAnimTimer += Time.deltaTime;
+        }
+        else
+        {
+            legAnimSwim = false;
+            anim.SetBool("swimlegs", false);
+        }
     }
 
     private void CheckBreath()
@@ -211,4 +251,38 @@ public class SinkManager : MonoBehaviour
         }
         autoRecover = true;
     }
+
+    //IEnumerator SwimArmAnimCooldown()
+    //{
+    //    yield return null;
+    //    float t = 0;
+    //    while (t < swimResetTime)
+    //    {
+    //        t += Time.deltaTime;
+
+    //        if (swimArms)
+    //        {
+    //            StopCoroutine(SwimArmAnimCooldown());
+    //        }
+    //        yield return null;
+    //    }
+    //    anim.SetBool("swimarms", false);
+    //}
+
+    //IEnumerator SwimLegAnimCooldown()
+    //{
+    //    yield return null;
+    //    float t = 0;
+    //    while (t < swimResetTime)
+    //    {
+    //        t += Time.deltaTime;
+
+    //        if (swimLegs)
+    //        {
+    //            break;
+    //        }
+    //        yield return null;
+    //    }
+    //    anim.SetBool("swimlegs", false);
+    //}
 }

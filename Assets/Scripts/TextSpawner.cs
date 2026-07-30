@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class TextSpawner : MonoBehaviour
 {
@@ -36,6 +37,11 @@ public class TextSpawner : MonoBehaviour
     private float curTextSoftness;
     private bool runOnStart;
 
+    private bool endGame = false;
+    public float gameEndTimer;
+    public GameObject floatScene;
+    public GameObject skyScene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +67,11 @@ public class TextSpawner : MonoBehaviour
         {
             isSubmerging = false;
             EndSubmerge();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
@@ -89,8 +100,10 @@ public class TextSpawner : MonoBehaviour
             textHandleRef.moveSpeed = randSpeed;
             StartCoroutine(TextSpawnDelay());
         }
-        else
+        else if (!endGame)
         {
+            endGame = true;
+            StartCoroutine(EndGameEvents());
             //text is done and end game
         }
     }
@@ -101,6 +114,13 @@ public class TextSpawner : MonoBehaviour
         yield return new WaitForSeconds(rand);
 
         SpawnText();
+    }
+
+    IEnumerator EndGameEvents()
+    {
+        yield return new WaitForSeconds(gameEndTimer);
+        floatScene.SetActive(false);
+        skyScene.SetActive(true);
     }
 
     private void BeginSubmerge()
